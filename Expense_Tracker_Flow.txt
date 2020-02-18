@@ -1,0 +1,14 @@
+Expense Tracker Software Flow
+
+Step 1) User selects type of payment
+	User enters what they purchased
+	User enters the date item was purchased
+	User enters the amount the item cost
+
+Step 2) User clicks the "Add New Expense" button
+	
+Step 3) New item should be added to the table with all four parameters
+	for the purchase along with a button to delete the item from the list
+
+Step 4) New item should be stored in local storage so the list
+	stays when the page is revisted by the user
