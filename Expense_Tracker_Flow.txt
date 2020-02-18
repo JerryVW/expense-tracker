@@ -1,14 +1,21 @@
 Expense Tracker Software Flow
 
 Step 1) User selects type of payment
+		function gets the info to be returned and creates the td element to be displayed
 	User enters what they purchased
+		function gets the info to be returned and creates the td element to be displayed
 	User enters the date item was purchased
+		function gets the info to be returned and creates the td element to be displayed
 	User enters the amount the item cost
+		function gets the info to be returned and creates the td element to be displayed
 
 Step 2) User clicks the "Add New Expense" button
+		function recieves the data for the td elements and creates a tr element and adds it to the screen
+		with a delete button to remove it
 	
 Step 3) New item should be added to the table with all four parameters
 	for the purchase along with a button to delete the item from the list
 
 Step 4) New item should be stored in local storage so the list
 	stays when the page is revisted by the user
+		create arrays for each of the td elements to be able to store the data

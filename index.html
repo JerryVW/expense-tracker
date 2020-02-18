@@ -21,7 +21,7 @@
                 </select>
 
                 <span>Purchase:</span>
-                <input type="text" name="purchased" placeholder="What did you purchase?">
+                <input id="purchased" type="text" name="purchased" placeholder="What did you purchase?">
             </div>
 
             <div id="date-amount" class="date_and_amount">
@@ -32,27 +32,27 @@
                 <input type="number" name="amount" placeholder="Amount spent?">
             </div>
 
-            <div id="add-button">
-                <button type="submit"><span>Add New Expense</span></button>
+            <div>
+                <button id="add-button" type="submit"><span>Add New Expense</span></button>
             </div>
         </form>
 
-        <table>
-            <col width="10">
-            <col width="100">
-            <col width="20">
-            <col width="10">
-            <tr>
-                <th id="type" width="10%">Type</th>
-                <th id="purchase" width="60%">Purchase</th>
-                <th id="date" width="20%">Date</th>
-                <th id="amount" width="10%">Amount</th>
-            </tr>
-
-            <tr id="empty-row">
-                <td colspan="4"><span>New items will be added here.</span></td>
-            </tr>
-        </table>
+        <div class="table_div">
+            <h3>New items will be added here.</h3>
+            <table>
+                <tr>
+                    <th id="type" width="10%">Type</th>
+                    <th id="purchase" width="60%">Purchase</th>
+                    <th id="date" width="20%">Date</th>
+                    <th id="amount" width="10%">Amount</th>
+                </tr>
+    
+                <tr id="empty-row">
+                    
+                </tr>
+            </table>
+        </div>
+        
         
     </div>
     
