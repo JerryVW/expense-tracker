@@ -96,6 +96,7 @@ button:active {
 }
 
 table {
+    width: 100%;
     margin: 30px 0;
     border: 1px solid black;
     background-color: white;
@@ -106,15 +107,29 @@ table {
 
 th {
     background-color: rgb(231, 231, 231);
-    padding: 3px;
+    padding: 10px 15px;
 }
 
 .tab_data1, .tab_data2, .tab_data3, .tab_data4 {
     padding: 10px 15px;
-    font-size: 20px;
-    text-align: center;
+    font-size: 25px;
 }
 
-/* tr:nth-child(odd) {
+.tab_data4 {
+    color: red;
+}
+
+tr:nth-child(odd) {
     background-color: rgb(231, 231, 231);
-} */
+}
+
+.to-delete {
+    font-size: 22px;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    margin: 4px 0 0 35%;
+    box-shadow: none;
+}
