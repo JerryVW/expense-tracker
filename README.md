@@ -4,7 +4,7 @@ Built an Expense Tracker with HTML, CSS, Flexbox, and Javascript
 
 You can check it out [here](https://jerryvw.github.io/expense-tracker/)
 
-<img src="img/expens-tracker.png">
+<img src="img/expense-tracker.png">
 
 <h2>Summary</h2> 
 
