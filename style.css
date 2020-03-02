@@ -110,7 +110,7 @@ th {
     padding: 10px 15px;
 }
 
-.tab_data1, .tab_data2, .tab_data3, .tab_data4 {
+.tab_data1 {
     padding: 10px 15px;
     font-size: 25px;
 }
@@ -119,7 +119,7 @@ th {
     color: red;
 }
 
-tr:nth-child(odd) {
+tr:nth-child(even) {
     background-color: rgb(231, 231, 231);
 }
 

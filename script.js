@@ -1,91 +1,90 @@
-window.onload = function() {
+window.onload = function(newExpense) {
     document.getElementById("add-button").addEventListener("click", createDataRow);
+
+    let newExpenseArray = JSON.parse(localStorage.getItem("newExpense")) || [];
+    for(let i = 0; i < newExpenseArray.length; i++) {
+        console.log(i, newExpenseArray[i]);
+        for(let property in newExpenseArray[i]) {
+            console.log(property, newExpenseArray[i][property]);
+            createDataTable(newExpenseArray[i][property]);
+        }
+    }
 }
 
-let type;
-let purchase;
-let date;
-let amount;
-
-// const typeArray = JSON.parse(localStorage.getItem("tab_data1")) || [];
-// const purchaseArray = JSON.parse(localStorage.getItem("tab_data2")) || [];
-// const dateArray = JSON.parse(localStorage.getItem("tab_data3")) || [];
-// const amountArray = JSON.parse(localStorage.getItem("tab_data4")) || [];
 
 function createDataRow(e) {
     e.preventDefault();
+    createDataTable(type, purchase, date, amount);
+}
+
+function createDataTable() {
+    let type = document.getElementById("currency-type").value;
+    let purchase = document.getElementById("purchased").value;
+    let date = document.getElementById("date").value;
+    let amount = document.getElementById("amount").value;
+
+    let newExpense = {
+        id: Date.now(),
+        types: type,
+        purchases: purchase,
+        dates: date,
+        amounts: amount
+    }
+    let newExpenseArray = JSON.parse(localStorage.getItem("newExpense")) || []
+    newExpenseArray.push(newExpense);
+    localStorage.setItem("newExpense", JSON.stringify(newExpenseArray));
+
     let tableBody = document.querySelector("tbody");
     const tr = document.createElement("tr");
+    tr.id = newExpense.id;
     tableBody.appendChild(tr);
 
     document.createElement("td");
-    tr.appendChild(paymentType());
+    tr.appendChild(getPaymentType(type));
     
     document.createElement("td");
-    tr.appendChild(purchaseType());
+    tr.appendChild(getPurchaseType(purchase));
 
     document.createElement("td");
-    tr.appendChild(dateOfPurchase());
+    tr.appendChild(getDateOfPurchase(date));
 
     document.createElement("td");
-    tr.appendChild(amountOfPurchase());
+    tr.appendChild(getAmountOfPurchase(amount));
 
     document.createElement("td");
     tr.appendChild(createDeleteButton());
+    createDeleteButton();
+
+    return newExpense;
 }
 
-function paymentType() {
-    type = document.getElementById("currency-type").value;
+function getPaymentType(paymentType) {
     const td1 = document.createElement("td");
     td1.className = "tab_data1";
-    td1.textContent = type;
-    const typeArray = JSON.parse(localStorage.getItem("tab_data1")) || [];
-    typeArray.push(type);
-    localStorage.setItem("tab_data1", JSON.stringify(typeArray));
-    console.log(typeArray);
-
+    td1.textContent = paymentType;
     return td1;
 }
 
-function purchaseType() {
-    purchase = document.getElementById("purchased").value;
+function getPurchaseType(purchaseType) {
     const td2 = document.createElement("td");
-    td2.className = "tab_data2";
-    td2.textContent = purchase;
-    const purchaseArray = JSON.parse(localStorage.getItem("tab_data2")) || [];
-    purchaseArray.push(purchase);
-    localStorage.setItem("tab_data2", JSON.stringify(purchaseArray));
+    td2.className = "tab_data1";
+    td2.textContent = purchaseType;
     purchase = document.getElementById("purchased").value = "";
-    console.log(purchaseArray);
-
     return td2;
 }
 
-function dateOfPurchase() {
-    date = document.getElementById("date").value;
+function getDateOfPurchase(dateOfPurchase) {
     const td3 = document.createElement("td");
-    td3.className = "tab_data3";
-    td3.textContent = date;
-    const dateArray = JSON.parse(localStorage.getItem("tab_data3")) || [];
-    dateArray.push(date);
-    localStorage.setItem("tab_data3", JSON.stringify(dateArray));
-    console.log(dateArray);
-
+    td3.className = "tab_data1";
+    td3.textContent = dateOfPurchase.split("-").reverse().join("-");
     return td3;
 }
 
-function amountOfPurchase() {
-    amount = document.getElementById("amount").value;
+function getAmountOfPurchase(amountOfPurchase) {
     const td4 = document.createElement("td");
-    td4.className = "tab_data4";
-    td4.textContent = "$" + amount;
-    const amountArray = JSON.parse(localStorage.getItem("tab_data4")) || [];
-    amountArray.push(amount);
-    localStorage.setItem("tab_data4", JSON.stringify(amountArray));
+    td4.className = "tab_data1";
+    td4.textContent = "$" + amountOfPurchase;
     amount = document.getElementById("amount").value = "";
-    console.log(amountArray);
-    createDeleteButton();
-
     return td4;
 }
 
@@ -94,18 +93,22 @@ function createDeleteButton() {
     button.className = "to-delete";
     button.textContent = "X";
     button.addEventListener("click", function(e) {
-        if(e.target.classList.contains("to-delete")){
-            let expenseListItem = document.querySelector("tbody");
-            const tr = e.target.parentElement;
-            expenseListItem.removeChild(tr);
-            const listArray = JSON.parse(localStorage.getItem("tab_data1", "tab_data2", "tab_data3", "tab_data4")) || [];
-            let arrayList = listArray.indexOf(e.target.textContent);
-            for (key of listArray) {
-                listArray.splice(arrayList, 1);
+    if(e.target.classList.contains("to-delete")){
+        let expenseListItem = document.querySelector("tbody");
+        const tr = e.target.parentElement;
+        expenseListItem.removeChild(tr);
+
+        let newExpenseArray = JSON.parse(localStorage.getItem("newExpense")) || [];
+        const updatedArray = newExpenseArray.filter(function(expense){
+            if(expense.id !== parseInt(tr.id)) {
+                return true;
+            } else {
+                return false;
             }
-            localStorage.setItem("tab_data1", "tab_data2", "tab_data3", "tab_data4", JSON.stringify(listArray));
+        });
+        localStorage.setItem("newExpense", JSON.stringify(updatedArray));
+        return updatedArray;
         }
     });
-
     return button;
 }
