@@ -3,21 +3,13 @@ window.onload = function(newExpense) {
 
     let newExpenseArray = JSON.parse(localStorage.getItem("newExpense")) || [];
     for(let i = 0; i < newExpenseArray.length; i++) {
-        console.log(i, newExpenseArray[i]);
-        for(let property in newExpenseArray[i]) {
-            console.log(property, newExpenseArray[i][property]);
-            createDataTable(newExpenseArray[i][property]);
-        }
+        createDataTable(newExpenseArray[i])
     }
 }
 
 
 function createDataRow(e) {
     e.preventDefault();
-    createDataTable(type, purchase, date, amount);
-}
-
-function createDataTable() {
     let type = document.getElementById("currency-type").value;
     let purchase = document.getElementById("purchased").value;
     let date = document.getElementById("date").value;
@@ -33,57 +25,59 @@ function createDataTable() {
     let newExpenseArray = JSON.parse(localStorage.getItem("newExpense")) || []
     newExpenseArray.push(newExpense);
     localStorage.setItem("newExpense", JSON.stringify(newExpenseArray));
+    console.log(newExpenseArray);
+    createDataTable(newExpense);
+}
 
+function createDataTable(newExpense) {
     let tableBody = document.querySelector("tbody");
     const tr = document.createElement("tr");
     tr.id = newExpense.id;
     tableBody.appendChild(tr);
 
     document.createElement("td");
-    tr.appendChild(getPaymentType(type));
+    tr.appendChild(getPaymentType(newExpense.types));
     
     document.createElement("td");
-    tr.appendChild(getPurchaseType(purchase));
+    tr.appendChild(getPurchaseType(newExpense.purchases));
 
     document.createElement("td");
-    tr.appendChild(getDateOfPurchase(date));
+    tr.appendChild(getDateOfPurchase(newExpense.dates));
 
     document.createElement("td");
-    tr.appendChild(getAmountOfPurchase(amount));
+    tr.appendChild(getAmountOfPurchase(newExpense.amounts));
 
     document.createElement("td");
     tr.appendChild(createDeleteButton());
     createDeleteButton();
-
-    return newExpense;
 }
 
-function getPaymentType(paymentType) {
+function getPaymentType(type) {
     const td1 = document.createElement("td");
     td1.className = "tab_data1";
-    td1.textContent = paymentType;
+    td1.textContent = type;
     return td1;
 }
 
-function getPurchaseType(purchaseType) {
+function getPurchaseType(purchase) {
     const td2 = document.createElement("td");
     td2.className = "tab_data1";
-    td2.textContent = purchaseType;
+    td2.textContent = purchase;
     purchase = document.getElementById("purchased").value = "";
     return td2;
 }
 
-function getDateOfPurchase(dateOfPurchase) {
+function getDateOfPurchase(date) {
     const td3 = document.createElement("td");
     td3.className = "tab_data1";
-    td3.textContent = dateOfPurchase.split("-").reverse().join("-");
+    td3.textContent = date.split("-").reverse().join("-");
     return td3;
 }
 
-function getAmountOfPurchase(amountOfPurchase) {
+function getAmountOfPurchase(amount) {
     const td4 = document.createElement("td");
     td4.className = "tab_data1";
-    td4.textContent = "$" + amountOfPurchase;
+    td4.textContent = "$" + amount;
     amount = document.getElementById("amount").value = "";
     return td4;
 }
