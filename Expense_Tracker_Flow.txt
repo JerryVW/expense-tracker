@@ -18,4 +18,4 @@ Step 3) New item should be added to the table with all four parameters
 
 Step 4) New item should be stored in local storage so the list
 	stays when the page is revisted by the user
-		create arrays for each of the td elements to be able to store the data
+	create arrays for each of the td elements to be able to store the data
